@@ -1,48 +1,43 @@
+@import url("columns.css");
+
+a.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    text-decoration: none;
+    z-index: 999;
+}
+
 .list__item {
     text-align: center;
     width: 275px;
+    box-shadow: grey 0 0 6px;
+    border: grey solid;
+    padding: 10px;
+    position: relative;
+}
+
+.list__item:hover {
+    background-color: #fcfcfc;
+    box-shadow: none;
+    cursor: pointer;
 }
 
 .list__item img {
     width: 200px;
 }
 
-ul{
+ul {
     list-style-type: none;
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
 }
 
-body {
-    margin: 0;
-}
-
-.col-1 {width: 8.33%;}
-.col-2 {width: 16.66%;}
-.col-3 {width: 25%;}
-.col-4 {width: 33.33%;}
-.col-5 {width: 41.66%;}
-.col-6 {width: 50%;}
-.col-7 {width: 58.33%;}
-.col-8 {width: 66.66%;}
-.col-9 {width: 75%;}
-.col-10 {width: 83.33%;}
-.col-11 {width: 91.66%;}
-.col-12 {width: 100%;}
-
-[class*="col-"] {
-    float: left;
-    padding: 24px;
-}
-
-.row::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
-
-nav {
+header {
     width: auto;
     height: 150px;
     background-color: #fcfcfc;
