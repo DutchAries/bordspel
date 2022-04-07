@@ -19,19 +19,26 @@ async function fetchUsers() {
 async function fetchUserDTO(currUser){
     const response = await fetch("https://bordspelbackend.azurewebsites.net/api/gebruikers/vind/"+currUser.firstName);
     const result = await response.json();
-    const profiel = document.getElementById("profiel");
+    const profiel = document.getElementById("profileinfo");
     profiel.innerHTML = `
-        <div>
-        <div style="float: left">
+        <div> 
         <img id=profilePicture src="${result.profilePicture}"/> 
         </div>
+        <div>
         <h1>${result.displayNaam}</h1>
+        <p>${result.beschrijving}</p>
         </div>
         `
-    const info = document.getElementById("userdata").children[0];
-    info.innerText = result.beschrijving;
-    const checkin = document.getElementById("checkins").children[0];
-    checkin.innerText = JSON.stringify(result.checkins);
+    const userdata = document.getElementById("userdata");
+    for (let i = 0; i < result.checkins.length; i++){
+        let checkin = result.checkins[i];
+        userdata.innerHTML += `
+        <div id="checkin" class="wrapper">
+        <p> ${result.displayNaam} heeft ${checkin.bordspel} gespeeld in ${checkin.locatie}.
+        </div>
+        `
+    }
+    // userdata.innerText = JSON.stringify(result.checkins);
     
 }
 

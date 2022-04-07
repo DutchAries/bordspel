@@ -98,12 +98,19 @@ img {
 }
 
 #profilePicture {
-    max-height: 100%;
-    max-width: 100%;
+    max-height: 150%;
+    max-width: 200%;
 }
 
-#displayGame, #userdata, #checkins > div {
+#displayGame, #userdata > div {
     background-color: #fff;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.116) 0px 0px 6px;
+    padding: 24px;
+}
+
+#profile > div {
+    background-color: rgb(97, 93, 93);
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.116) 0px 0px 6px;
     padding: 24px;

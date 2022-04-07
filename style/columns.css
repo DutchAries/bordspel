@@ -16,6 +16,10 @@ main > * {
     margin-bottom: 24px !important;
 }
 
+div#checkin{
+    margin: 24px;
+}
+
 .wrapper {
     display: grid;
     grid-gap: 24px;
