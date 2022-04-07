@@ -20,12 +20,13 @@ async function fetchUserDTO(currUser){
     const response = await fetch("https://bordspelbackend.azurewebsites.net/api/gebruikers/vind/"+currUser.firstName);
     const result = await response.json();
     const profiel = document.getElementById("profiel");
+    const display = result.displayNaam.split("~");
     profiel.innerHTML = `
         <div>
         <div style="float: left">
         <img id=profilePicture src="${result.profilePicture}"/> 
         </div>
-        <h1>${result.displayNaam}</h1>
+        <h1>${display[0]}</h1>
         </div>
         `
     const info = document.getElementById("userdata").children[0];
