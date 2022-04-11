@@ -17,29 +17,49 @@ async function fetchUsers() {
 
 // deze functie haalt de gebruikersDTOs op om weer te geven op een gebruikerspagina
 async function fetchUserDTO(currUser){
-    const response = await fetch("https://bordspelbackend.azurewebsites.net/api/gebruikers/vind/"+currUser.firstName);
+    const response = await fetch(baseURL+"/api/gebruikers/vind/"+currUser.firstName);
     const result = await response.json();
-    const profiel = document.getElementById("profiel");
+    const profiel = document.getElementById("profileinfo");
+    console.log(profiel);
     profiel.innerHTML = `
-        <div>
-        <div style="float: left">
+        <div> 
         <img id=profilePicture src="${result.profilePicture}"/> 
         </div>
+        <div>
         <h1>${result.displayNaam}</h1>
+        <p>${result.beschrijving}</p>
         </div>
         `
-    const info = document.getElementById("userdata").children[0];
-    info.innerText = result.beschrijving;
-    const checkin = document.getElementById("checkins").children[0];
-    checkin.innerText = JSON.stringify(result.checkins);
-    
+    const userdata = document.getElementById("userdata");
+    userdata.innerHTML='';
+    let bigString = '';
+    for (let i = 0; i < result.checkins.length; i++){
+        let checkin = result.checkins[i];
+        bigString += `
+        <div id="checkin" class="wrapper">
+        <h2> ${result.displayNaam} heeft ${checkin.bordspel} gespeeld in ${checkin.locatie}. </h2>
+        <p> Rating: ${checkin.rating}<br>${checkin.review}</p>
+        `
+        if (checkin.foto != null){
+            bigString+=`
+            <img id="checkinImage" src="${checkin.foto}"> 
+            `
+        }
+        bigString+=`</div>`;
+    }
+    userdata.innerHTML=bigString;
+    // userdata.innerText = JSON.stringify(result.checkins);
+}
+
+window.onload=function(){
+    run();
 }
 
 async function run() {
     const users = await fetchUsers();
     
     for (const user of users) {
-        const endPoint = await fetch("https://bordspelbackend.azurewebsites.net/api/gebruikers", {
+        const endPoint = await fetch(baseURL+"/api/gebruikers", {
             method: "POST",
             headers: {
                 "Accept": "application/json",
@@ -66,7 +86,10 @@ async function run() {
     } else {
         currentUser = JSON.parse(currentUser);
 
-        setUser(currentUser);
+        setUserAvatar(currentUser);
+        if (window.location.href.indexOf("user.html") > -1){
+            fetchUserDTO(currentUser);
+        }  
         let temp = `<select id="userSelect">`;
         users.forEach((user) => {
             let selected = false;
@@ -87,19 +110,25 @@ async function run() {
             localStorage.setItem("user", JSON.stringify(selectedUser));
             logIn(selectedUser, (id) => {
                 localStorage.setItem("ID",id);
+
+                //document.location.reload(); // quick fix voor het laten zien van checkins: weg te halen
+
             });
-            setUser(selectedUser);    
+            setUserAvatar(selectedUser);
+            if (window.location.href.indexOf("user.html") > -1){
+                fetchUserDTO(selectedUser);
+            }   
         });
     }
 }
-run();
+
 
 function setUserAvatar(user) {
     document.getElementById("userAvatar").setAttribute("src", user.avatar)
 }
 
 function logIn(user, afterLogin) {
-    fetch("https://bordspelbackend.azurewebsites.net/api/gebruikers/login/"+user.email, {
+    fetch(baseURL+"/api/gebruikers/login/"+user.email, {
         method: "GET",
         headers: {
             "Accept": "application/json",
