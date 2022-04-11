@@ -56,7 +56,7 @@ window.addEventListener('DOMContentLoaded', () => {
 async function checkIn() {
     const game = await fetchGame();
 
-    const endPoint = await fetch("https://bordspelbackend.azurewebsites.net/api/gebruikers/newcheckin/"+localStorage.getItem("ID"), {
+    const endPoint = await fetch(baseURL+"/api/gebruikers/newcheckin/"+localStorage.getItem("ID"), {
         method: "POST",
         headers: {
             "Accept": "application/json",
@@ -67,7 +67,20 @@ async function checkIn() {
             locatie: document.getElementById("locatieText").value,
             win: document.getElementById("gewonnen").checked,
             rating: document.getElementById("slider-step-value").innerText,
-            review: document.getElementById("reviewText").value
+            review: document.getElementById("reviewText").value,
+            foto: imageBase64
         })
     });
+}
+
+//encodeImgtoBase64(document.getElementById("imagefile"))
+var imageBase64='';
+
+function encodeImgtoBase64(element) {
+    var file = element.files[0];
+    var reader = new FileReader();
+    reader.onloadend = function () {
+        imageBase64 = reader.result;
+    }
+    reader.readAsDataURL(file);
 }

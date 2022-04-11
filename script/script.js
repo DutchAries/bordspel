@@ -53,3 +53,4 @@ async function listGames(zoekOpdracht) {
 
     container.appendChild(unorderedListEl);
 }
+

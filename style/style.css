@@ -102,6 +102,11 @@ img {
     max-width: 200%;
 }
 
+#checkinImage {
+    max-height: 20%;
+    max-width: 20%;
+}
+
 #displayGame, #userdata > div {
     background-color: #fff;
     border-radius: 10px;
