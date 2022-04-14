@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Een pagina om te registreren dan wel in te loggen. (Log in zonder, Registreer met form)-->
+  
+<html>    
+<head>    
+    <title>Login Form</title>
+    <link rel="stylesheet" href="style/style.css">
+    <script src="script/config.js"></script> 
+    <script src="script/script.js"></script>
+    <script src="script/users.js"></script> 
+    <script src="script/login.js"></script>    
+</head>   
+
+<body>
+  <header>
+    <div class="wrapper drieEen">
+        <div>
+            <a href="index.html">
+                <h1>Bordspellen</h1>
+            </a>
+        </div>
+        <div class="innerWrapper eenDrie">
+            <div>
+                <a href="user.html">
+                    <img id="userAvatar" src="" alt="user avatar">
+                </a>
+            </div>
+            <div>
+                <input type="text" id="invoer" onkeydown="return checkEnter(event.key)"
+                    placeholder="Zoek naar spellen...">
+            </div>
+        </div>
+    </div>
+  </header>
+  <main>   
+    <h2>Login Pagina</h2>    
+    <div class="login">    
+    <form id="login" method="get" action="login.php">    
+        <label><b>Gebruikersnaam     
+        </b>    
+        </label>    
+        <input type="text" name="Uname" id="Uname" placeholder="Gebruikersnaam">    
+        <br><br>    
+        <label><b>Wachtwoord     
+        </b>    
+        </label>    
+        <input type="Password" name="Pass" id="Pass" placeholder="Wachtwoord">    
+        <br><br>    
+        <input type="button" name="log" id="log" value="Log In">       
+        <br><br>       
+    </form>     
+    </div>
+    <h2>Nog geen account? <a class="open-button" href="#M">Registreer</a></h2>    
+  </main> 
+
+<div id="M" class="modal">
+    <div class="modalContent">
+        <h1>Registreer</h1>
+
+        <label for="email"><b>Email</b></label>
+        <input type="text" id="eMail" placeholder="Enter Email" name="email" required>
+        <br><br>
+        <label for="psw"><b>Wachtwoord</b></label>
+        <input type="password" id="wachtWoord" placeholder="Enter Password" name="psw" required>
+        <br><br>
+        <label for="psw"><b>Displaynaam</b></label>
+        <input type="text" id="displayNaam" placeholder="Creeer Displaynaam" name="dn" required>
+        <p>Wat voor een type gebruiker ben je?</p>
+        <input type="radio" name="geb" id="prive">
+        <label for="prive">Prive</label><br>
+        <input type="radio" name="geb" id="uitgever">
+        <label for="uitgever">Uitgever</label>
+        <br><br>
+        <button type="submit" class="btn" onclick="registreer()">Registreer</button>
+        <button type="button" class="btn cancel" onclick="window.location.href='#';">Sluit</button> 
+    </div>
+    <a href="#" class="closeModal"></a>
+</div>
+
+
+
+<!--
+<script>
+ async function login(){
+    const endPoint = await fetch(baseURL+"/api/gebruikers/newcheckin/", 
+    {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            gebruikersNaam: document.getElementById("eMail").innerText,
+            wachtwoord: document.getElementById("wachtWoord").innerText,
+            displayNaam: document.getElementById("displayNaam").innerText,
+            beschrijving: "",
+            profilePicture: ""
+        })
+    });
+}
+</script>
+-->
+
+<!-- <button class="open-button" onclick="openForm()">Open Form</button> -->
+
+<!--
+<div class="form-popup" id="myForm">
+  <form action="/action_page.php" class="form-container">
+    <h1>Login</h1>
+
+    <label for="email"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="email" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+    
+    <button type="submit" class="btn">Login</button>
+    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+  </form>
+</div>
+-->
+
+
+<!--
+<form action="/action_page.php">
+  <label for="fname">First name:</label><br>
+  <input type="text" id="fname" name="fname" value="John"><br>
+  <label for="lname">Last name:</label><br>
+  <input type="text" id="lname" name="lname" value="Doe"><br><br>
+  <input type="submit" value="Submit">
+</form>
+-->
+
+<!--
+<script>
+  function openForm() {
+    document.getElementById("myForm").style.display = "block";
+  }
+  
+  function closeForm() {
+    document.getElementById("myForm").style.display = "none";
+  }
+  </script>
+-->
+
+</body>    
+</html>

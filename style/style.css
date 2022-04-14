@@ -103,8 +103,8 @@ img {
 }
 
 #checkinImage {
-    max-height: 20%;
-    max-width: 20%;
+    height: auto;
+    max-width: 500px;
 }
 
 #displayGame, #userdata > div {
