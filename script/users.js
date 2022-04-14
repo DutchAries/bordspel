@@ -55,8 +55,6 @@ window.onload=function(){
     run();
 }
 
-setU
-
 async function run() {
     const users = await fetchUsers(); // haal de 6 api gebruikers op
     
@@ -76,10 +74,9 @@ async function run() {
             })
         });
     };
-
-    let currentUser = localStorage.getItem("user"); // stel heir currentuser in
-    if (!currentUser) {
-        localStorage.setItem("user", JSON.stringify(users[0]));
+    let currentUser = localStorage.getItem("user"); // set currentUser op item in local storage genaamd "user"
+    if (!currentUser) {             
+        localStorage.setItem("user", JSON.stringify(users[0]));  // zet hier een localstorageitem genaamd "user" als die er niet is
         logIn(users[0], (id) => {
             localStorage.setItem("ID",id);
 
@@ -89,10 +86,10 @@ async function run() {
         currentUser = JSON.parse(currentUser);
 
         setUserAvatar(currentUser);
-        if (window.location.href.indexOf("user.html") > -1){
+        if (window.location.href.indexOf("user.html") > -1){  //als het de user pagina is
             fetchUserDTO(currentUser);
         }  
-        let temp = `<select id="userSelect">`;
+        let temp = `<select id="userSelect">`;  // creeert hier de drop down menu
         users.forEach((user) => {
             let selected = false;
             if (currentUser.firstName === user.firstName) {
@@ -103,15 +100,15 @@ async function run() {
           `;
         });
         temp += `</select>`;
-        document.body.innerHTML += temp;
+        document.body.innerHTML += temp; // voegt de drop down hier toe aan de pagina 
         const userSelect = document.getElementById("userSelect");
-        userSelect.addEventListener("change", (ev) => {
+        userSelect.addEventListener("change", (ev) => { // verandert hier de huidige user middels het menuutje
             const selectedUser = users.find((user) => {
                 return user.firstName === ev.target.value
             });
-            localStorage.setItem("user", JSON.stringify(selectedUser));
+            localStorage.setItem("user", JSON.stringify(selectedUser)); // zet hier de huidige user in local storage
             logIn(selectedUser, (id) => {
-                localStorage.setItem("ID",id);
+                localStorage.setItem("ID",id);  // zet hier id van huidige user in lokale storage
 
                 //document.location.reload(); // quick fix voor het laten zien van checkins: weg te halen
 
@@ -130,19 +127,14 @@ function setUserAvatar(user) {
 }
 
 function logIn(user, afterLogin) {
-    fetch(baseURL+"/api/gebruikers/login/"+user.email, {
+    fetch(baseURL+"/api/gebruikers/login/"+user.email, { // dit werkt dus alleen voor de reqres users, wegens deze email
         method: "GET",
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json"
         },
     })
-    .then(response => response.json())
+    .then(response => response.json()) 
     .then(data => afterLogin(data))
     //.then(dto => fetchUserDTO(dto));
-}
-
-function setUser(user){
-    setUserAvatar(user);
-    fetchUserDTO(user);
 }
