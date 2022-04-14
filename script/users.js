@@ -55,10 +55,12 @@ window.onload=function(){
     run();
 }
 
+setU
+
 async function run() {
-    const users = await fetchUsers();
+    const users = await fetchUsers(); // haal de 6 api gebruikers op
     
-    for (const user of users) {
+    for (const user of users) { // en post ze naar de backend
         const endPoint = await fetch(baseURL+"/api/gebruikers", {
             method: "POST",
             headers: {
@@ -75,7 +77,7 @@ async function run() {
         });
     };
 
-    let currentUser = localStorage.getItem("user");
+    let currentUser = localStorage.getItem("user"); // stel heir currentuser in
     if (!currentUser) {
         localStorage.setItem("user", JSON.stringify(users[0]));
         logIn(users[0], (id) => {
