@@ -55,8 +55,6 @@ window.onload=function(){
     run();
 }
 
-setU
-
 async function run() {
     const users = await fetchUsers(); // haal de 6 api gebruikers op
     
