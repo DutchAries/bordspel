@@ -37,6 +37,9 @@ function logInPersoon() {
         },
     })
     .then(response => response.json())
-    .then(id => localStorage.setItem("ID", id))
-    localStorage.setItem("user", user);
+    .then(id => {
+        localStorage.setItem("ID", id);
+        console.log(typeof id + id);
+    })
+    // localStorage.setItem("user", user);
 }
