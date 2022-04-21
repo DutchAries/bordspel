@@ -56,11 +56,12 @@ window.addEventListener('DOMContentLoaded', () => {
 async function checkIn() {
     const game = await fetchGame();
 
-    const endPoint = await fetch(baseURL+"/api/gebruikers/newcheckin/"+localStorage.getItem("ID"), {
+    const endPoint = await fetch(baseURL+"/api/gebruikers/newcheckin", {
         method: "POST",
         headers: {
             "Accept": "application/json",
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authentication": getCurrentUser().gebruikersId
         },
         body: JSON.stringify({
             bordspel: game[0].name,

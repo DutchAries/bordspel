@@ -28,15 +28,32 @@ function encodeImgtoBase64(element) {
 }
 
 function logInPersoon() {
-    let user = document.getElementById("Uname").value;
-    fetch(baseURL+"/api/gebruikers/login/"+user, { // dit werkt dus alleen voor de reqres users, wegens deze email
-        method: "GET",
+    fetch(baseURL+"/api/gebruikers/login", { 
+        method: "POST",
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json"
         },
+        body: JSON.stringify({
+                gebruikersnaam: document.getElementById("Uname").value,
+                wachtwoord: document.getElementById("Pass").value
+            })
     })
+
     .then(response => response.json())
-    .then(id => localStorage.setItem("ID", id))
-    localStorage.setItem("user", user);
+    .then(gebruikerDTO => localStorage.setItem("gebruiker", JSON.stringify(gebruikerDTO)))
+}
+
+function deleteUser(){
+    let id = localstorage.getItem("ID"); // dit moet nu worden aangepast omdat er geen losse ID in de storage zit?
+
+    fetch(baseURL+"/api/gebruikers/"+id, { 
+        method: "DELETE",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authentication": localStorage.getItem("ID") //idem?
+        },
+    })
+    .then( () => alert("gebruiker is verwijderd"))
 }
