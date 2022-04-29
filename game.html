@@ -9,9 +9,10 @@
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="noUiSlider/dist/nouislider.min.css">
     <script src="script/config.js"></script>
+    <script src="script/security.js"></script>
     <script src="script/script.js"></script>
     <script src="script/game.js"></script>
-    <script src="script/users.js"></script>
+    <script src="script/index.js"></script>
     <script src="noUiSlider/dist/nouislider.min.js"></script>
 </head>
 
@@ -69,7 +70,9 @@
             <p>Laat jouw mening over het spel horen.</p>
             <textarea name="review" maxlength="500" cols="70" rows="8"
                 placeholder="review" id="reviewText"></textarea><br><br>
-            <label for="upload">Selecteer een foto.</label><br><input id="imagefile" type="file" name="upload" onchange="encodeImgtoBase64(this)" accept="image/png, image/jpg, image/jpeg"><br><br>
+            <label for="upload">Selecteer een foto.</label><br>
+            <input id="imagefile" type="file" name="upload" onchange="encodeImgtoBase64(this)" 
+                accept="image/png, image/jpg, image/jpeg"><br><br>
             <input type="button" onclick="checkIn()" value="Check in">
         </div>
         <a href="#" class="closeModal"></a>

@@ -10,8 +10,8 @@ async function registreer(){
             gebruikersNaam: document.getElementById("eMail").value,
             wachtwoord: document.getElementById("wachtWoord").value,
             displayNaam: document.getElementById("displayNaam").value,
-            beschrijving: "",
-            profilePicture: ""
+            beschrijving: document.getElementById("reviewText").value,
+            profilePicture: imageBase64
         })
     });
 }
@@ -25,4 +25,35 @@ function encodeImgtoBase64(element) {
         imageBase64 = reader.result;
     }
     reader.readAsDataURL(file);
+}
+
+function logInPersoon() {
+    fetch(baseURL+"/api/gebruikers/login", { 
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+                gebruikersnaam: document.getElementById("Uname").value,
+                wachtwoord: document.getElementById("Pass").value
+            })
+    })
+
+    .then(response => response.json())
+    .then(gebruikerDTO => localStorage.setItem("gebruiker", JSON.stringify(gebruikerDTO)))
+}
+
+function deleteUser(){
+    let id = localstorage.getItem("ID"); // dit moet nu worden aangepast omdat er geen losse ID in de storage zit?
+
+    fetch(baseURL+"/api/gebruikers/"+id, { 
+        method: "DELETE",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authentication": localStorage.getItem("ID") //idem?
+        },
+    })
+    .then( () => alert("gebruiker is verwijderd"))
 }

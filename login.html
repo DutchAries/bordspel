@@ -7,8 +7,9 @@
     <title>Login Form</title>
     <link rel="stylesheet" href="style/style.css">
     <script src="script/config.js"></script> 
+    <script src="script/security.js"></script>
     <script src="script/script.js"></script>
-    <script src="script/users.js"></script> 
+    <script src="script/index.js"></script> 
     <script src="script/login.js"></script>    
 </head>   
 
@@ -46,8 +47,8 @@
         </b>    
         </label>    
         <input type="Password" name="Pass" id="Pass" placeholder="Wachtwoord">    
-        <br><br>    
-        <input type="button" name="log" id="log" value="Log In">       
+        <br><br>   
+        <input type="button" name="log" id="log" value="Log In" onclick="logInPersoon()">       
         <br><br>       
     </form>     
     </div>
@@ -72,6 +73,11 @@
         <input type="radio" name="geb" id="uitgever">
         <label for="uitgever">Uitgever</label>
         <br><br>
+        <textarea name="review" maxlength="500" cols="70" rows="8"
+          placeholder="Schrijf hier een kleine beschrijving van jezelf." id="reviewText"></textarea><br><br>
+        <label for="upload">Selecteer een profielfoto.</label><br>
+        <input id="imagefile" type="file" name="upload" onchange="encodeImgtoBase64(this)" 
+          accept="image/png, image/jpg, image/jpeg"><br><br>
         <button type="submit" class="btn" onclick="registreer()">Registreer</button>
         <button type="button" class="btn cancel" onclick="window.location.href='#';">Sluit</button> 
     </div>
